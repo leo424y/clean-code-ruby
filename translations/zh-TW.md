@@ -1343,22 +1343,9 @@ inventory_tracker.request_items
 **[⬆ back to top](#table-of-contents)**
 
 ## **Testing**
-Testing is more important than shipping. If you have no tests or an
-inadequate amount, then every time you ship code you won't be sure that you
-didn't break anything. Deciding on what constitutes an adequate amount is up
-to your team, but having 100% coverage (all statements and branches) is how
-you achieve very high confidence and developer peace of mind. This means that
-in addition to having a great testing framework, you also need to use a
-[good coverage tool](https://coveralls.io/).
+推薦工具 [good coverage tool](https://coveralls.io/).
 
-There's no excuse to not write tests. Ruby comes with its own testing tool (RSpec) built right in.
-Aim to always write tests
-for every new feature/module you introduce. If your preferred method is
-Test Driven Development (TDD), that is great, but the main point is to just
-make sure you are reaching your coverage goals before launching any feature,
-or refactoring an existing one.
-
-### Single expectation per test
+### 一個期望一句
 
 **Bad:**
 ```ruby
@@ -1403,17 +1390,9 @@ end
 **[⬆ back to top](#table-of-contents)**
 
 ## **Error Handling**
-Thrown errors are a good thing! They mean the runtime has successfully
-identified when something in your program has gone wrong and it's letting
-you know by stopping function execution on the current stack, killing the
-process, and notifying you in the logs with a stack trace.
+掌握錯誤
 
-### Don't ignore caught errors
-Doing nothing with a caught error doesn't give you the ability to ever fix
-or react to said error. Logging the error
-isn't much better as often times it can get lost in a sea of other logs. If you wrap any bit of code in a `begin/rescue` it means you
-think an error may occur there and therefore you should have a plan,
-or create a code path, for when it occurs.
+### 可能出錯的地方 log 且導向相關 user 或統計工具
 
 **Bad:**
 ```ruby
@@ -1449,8 +1428,7 @@ rescue StandardError => err
 end
 ```
 
-### Provide context with exceptions
-Use a descriptive error class name and a message when you raise an error. That way you know why the error occured and you can rescue the specific type of error.
+### 說明錯誤
 
 ***Bad:***
 ```ruby
@@ -1472,19 +1450,9 @@ end
 
 
 ## **Formatting**
-Formatting is subjective. Like many rules herein, there is no hard and fast
-rule that you must follow. The main point is DO NOT ARGUE over formatting.
-There are tons of tools like [RuboCop](https://github.com/bbatsov/rubocop) to automate this.
-Use one! It's a waste of time and money for engineers to argue over formatting.
+推薦[RuboCop](https://github.com/bbatsov/rubocop)
 
-For things that don't fall under the purview of automatic formatting
-(indentation, tabs vs. spaces, double vs. single quotes, etc.) look here
-for some guidance.
-
-### Use consistent capitalization
-Ruby is untyped, so capitalization tells you a lot about your variables,
-functions, etc. These rules are subjective, so your team can choose whatever
-they want. The point is, no matter what you all choose, just be consistent.
+### 大小寫統一
 
 **Bad:**
 ```ruby
@@ -1520,10 +1488,7 @@ class Alpaca; end
 **[⬆ back to top](#table-of-contents)**
 
 
-### Function callers and callees should be close
-If a function calls another, keep those functions vertically close in the source
-file. Ideally, keep the caller right above the callee. We tend to read code from
-top-to-bottom, like a newspaper. Because of this, make your code read that way.
+### 按照關聯順序排函式
 
 **Bad:**
 ```ruby
@@ -1610,8 +1575,7 @@ review.perf_review
 ## **Comments**
 
 
-### Don't leave commented out code in your codebase
-Version control exists for a reason. Leave old code in your history.
+### 沒用的 Code 就刪，git有存了
 
 **Bad:**
 ```ruby
@@ -1627,9 +1591,7 @@ do_stuff
 ```
 **[⬆ back to top](#table-of-contents)**
 
-### Don't have journal comments
-Remember, use version control! There's no need for dead code, commented code,
-and especially journal comments. Use `git log` to get history!
+### Git log
 
 **Bad:**
 ```ruby
